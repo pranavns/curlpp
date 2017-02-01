@@ -56,12 +56,12 @@ while test $# -gt 0; do
         ;;
 
     --version)
-	echo libcurlpp @VERSION@
+	echo libcurlpp @CURLPP_VERSION@
 	exit 0
 	;;
 
     --vernum)
-	echo @VERSIONNUM@
+	echo @CURLPP_VERSION_NUM@
 	exit 0
 	;;
 
@@ -70,11 +70,11 @@ while test $# -gt 0; do
 	;;
 
     --cflags)
-       	echo -I@includedir@ @CURLPP_CXXFLAGS@
+       	echo -I@includedir@ @CURLPP_CXXFLAGS@ `curl-config --cflags`
        	;;
 
     --libs)
-       	echo -L@libdir@ -lcurlpp @LDFLAGS@ @LIBS@ 
+       	echo -L@libdir@ -lcurlpp @LDFLAGS@ @LIBS@ `curl-config --libs`
        	;;
 
     *)
