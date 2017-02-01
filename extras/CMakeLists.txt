@@ -1,5 +1,5 @@
 # extracting curlpp version text + version num
-file (READ ${CURLPP_SOURCE_DIR}/include/curlpp/curlpp.hpp CURLPP_VERSION_H_CONTENTS)
+file (READ ${CURLPP_SOURCE_DIR}/include/curlpp/cURLpp.hpp CURLPP_VERSION_H_CONTENTS)
 
 string (REGEX MATCH "#define LIBCURLPP_VERSION \"[^\"]*"
   CURLPP_VERSION ${CURLPP_VERSION_H_CONTENTS})
