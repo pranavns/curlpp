@@ -33,7 +33,7 @@ before_script:
   - cmake ../
 
 script:
-  - make && make install
+  - make && sudo make install
   - cd ../examples && mkdir build && cd build
   - cmake ../
   - make 
