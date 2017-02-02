@@ -1,7 +1,13 @@
+cmake_minimum_required(VERSION 3.0)
+include(FindPkgConfig)
 pkg_check_modules(CURLPP REQUIRED curlpp)
 
+set(CMAKE_CXX_STANDARD 11) # C++11...
+set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
+set(CMAKE_CXX_EXTENSIONS OFF) #...without compiler extensions like gnu++11
+
+
 file(GLOB ExamplesFileList "*.cpp")
-DisplayList("Using Example Files:" "${ExamplesFileList}")
 
 # Create a meta target to create examples
 add_custom_target(build_all_examples COMMENT A target that requires all the examples.)

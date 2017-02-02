@@ -64,6 +64,7 @@ DisplayList("Using Source Files:" "${SourceFileList}")
 
 message(STATUS "Looking for CURL")
 include(FindCURL)
+cmake_minimum_required(VERSION 3.0)
 find_package(CURL REQUIRED)
 
 if(${CURL_FOUND})
@@ -90,6 +91,8 @@ message(STATUS
 )
 add_library(${PROJECT_NAME} SHARED ${HeaderFileList} ${SourceFileList})
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
-
-
+install(TARGETS ${PROJECT_NAME}
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib/static)
 
