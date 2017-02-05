@@ -74,8 +74,11 @@ while test $# -gt 0; do
        	;;
 
     --libs)
-       	echo -L@libdir@ -lcurlpp @LDFLAGS@ @LIBS@ `curl-config --libs`
+       	echo -L@libdir@ @LDFLAGS@ @LIBS@ `curl-config --libs` -lcurlpp
        	;;
+    --static-libs)
+       	echo @libdir_static@/libcurlpp_static.@libext@ @LDFLAGS@ @LIBS@ `curl-config --static-libs`
+        ;;
 
     *)
         echo "unknown option: $1"

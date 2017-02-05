@@ -89,9 +89,14 @@ message(STATUS
   "Defining the shared library for ${PROJECT_NAME} including "
   "all source and header files not in examples."
 )
+
 add_library(${PROJECT_NAME} SHARED ${HeaderFileList} ${SourceFileList})
 target_link_libraries(${PROJECT_NAME} ${CURL_LIBRARIES})
-install(TARGETS ${PROJECT_NAME}
+
+add_library(${PROJECT_NAME}_static STATIC ${HeaderFileList} ${SourceFileList})
+target_link_libraries(${PROJECT_NAME}_static ${CURL_LIBRARIES})
+
+install(TARGETS ${PROJECT_NAME} ${PROJECT_NAME}_static
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib/static)

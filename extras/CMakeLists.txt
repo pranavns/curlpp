@@ -13,25 +13,15 @@ message(STATUS "curlpp version num=[${CURLPP_VERSION_NUM}]")
 
 
 # curlpp-config needs the following options to be set.
+string(REPLACE "." "" libext "${CMAKE_STATIC_LIBRARY_SUFFIX}")
 set(CC "${CMAKE_C_COMPILER}")
 set(libdir "${CMAKE_INSTALL_PREFIX}/lib")
+set(libdir_static "${CMAKE_INSTALL_PREFIX}/lib/static")
 set(prefix "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix "\${prefix}")
 set(includedir "\${prefix}/include")
 
 set(LDFLAGS "${CMAKE_SHARED_LINKER_FLAGS}")
-set(LIBCURLPP_LIBS            "")
-foreach(_lib ${CMAKE_C_IMPLICIT_LINK_LIBRARIES} ${CURLPP_LIBS})
-  if(_lib MATCHES ".*/.*")
-    # static library
-    set(LIBCURLPP_LIBS          "${LIBCURLPP_LIBS} ${_lib}")
-  else()
-    # dynamic library
-    set(LIBCURLPP_LIBS          "${LIBCURLPP_LIBS} -l${_lib}")
-  endif()
-endforeach()
-
-
 
 # Finally generate a "curl-config" matching this config
 configure_file("${CURLPP_SOURCE_DIR}/extras/curlpp-config.in"
@@ -42,6 +32,9 @@ install(FILES "${CURLPP_BINARY_DIR}/curlpp-config"
           OWNER_READ OWNER_WRITE OWNER_EXECUTE
           GROUP_READ GROUP_EXECUTE
           WORLD_READ WORLD_EXECUTE)
+
+
+
 
 # Finally generate a pkg-config file matching this config
 configure_file("${CURLPP_SOURCE_DIR}/extras/curlpp.pc.in"
